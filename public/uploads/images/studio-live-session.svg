@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#0f172a"/>
+  <rect x="0" y="520" width="1200" height="280" fill="#020617"/>
+  <circle cx="920" cy="160" r="70" fill="#06b6d4" opacity="0.9"/>
+  <circle cx="720" cy="210" r="44" fill="#f59e0b" opacity="0.85"/>
+  <rect x="140" y="210" width="120" height="320" rx="28" fill="#1e293b"/>
+  <rect x="520" y="170" width="170" height="390" rx="34" fill="#334155"/>
+  <rect x="820" y="300" width="160" height="220" rx="22" fill="#1e293b"/>
+  <path d="M310 530c70-140 180-230 325-230s255 90 325 230" fill="none" stroke="#22c55e" stroke-width="16" stroke-linecap="round"/>
+  <path d="M310 570h650" stroke="#475569" stroke-width="18" stroke-linecap="round"/>
+  <text x="120" y="120" fill="#f8fafc" font-size="56" font-family="Arial, Helvetica, sans-serif" font-weight="700">Session live du collectif</text>
+  <text x="120" y="182" fill="#cbd5e1" font-size="28" font-family="Arial, Helvetica, sans-serif">Captation, balance et restitution video au studio</text>
+</svg>

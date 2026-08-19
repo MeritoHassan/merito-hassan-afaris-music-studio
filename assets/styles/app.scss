@@ -1,0 +1,345 @@
+// Variables pour votre slider
+$slider-perspective: 1000px;
+$slider-transition-time: 0.5s;
+$margin-inline: 30px;
+$header-size: 10px;
+
+*,
+::before,
+::after{
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+header{
+    li{
+        position: relative;
+    }
+    li:hover{
+        span{
+            position: absolute;
+            bottom: -2px;
+            height: 2px;
+            background-color: yellow;
+        }
+
+    }
+}
+.background-image{
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    z-index: 0;
+    overflow: clip;
+    &::before{
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url('../images/background.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        opacity: 0.70;
+        z-index: -1;
+    }
+
+
+}
+
+.slider{
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: minmax(250px, 1fr);
+    margin-inline: $margin-inline;
+
+    &:has(.side0:active) {
+        .side1,
+        .side2 {
+            opacity: 0;
+        }
+    }
+
+    &:has(.side1:active) {
+        .side0,
+        .side2 {
+            opacity: 0;
+        }
+    }
+    &:has(.side2:active) {
+        .side0,
+        .side1 {
+            opacity: 0;
+        }
+    }
+}
+.perspective {
+    perspective: $slider-perspective;
+    user-select: none;
+    .side0{
+        transform-style: preserve-3d;
+        transform: rotateY(20deg);
+        cursor: pointer;
+    }
+    .side0:active{
+        animation: leftTransition $slider-transition-time ease-out forwards;
+    }
+    .side1{
+        transform-style: preserve-3d;
+        transform: translateZ(-110px);
+        transition: transform $slider-transition-time ease-out;
+        cursor: pointer;
+    }
+    .side1:active{
+        animation: middleTransition $slider-transition-time ease-out forwards;
+    }
+    .side2{
+        transform-style: preserve-3d;
+        transform: rotateY(-20deg);
+        cursor: pointer;
+    }
+    .side2:active{
+        animation: rightTransition $slider-transition-time ease-out forwards;
+    }
+    figure{
+        position: relative;
+        margin: 0;
+        display: block;
+        h2{
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000,
+                0 0 10px rgba(255, 255, 255, 0.7);
+            width: 90%;
+            color: white;
+            text-align: center;
+        }
+        img {
+            display: block;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            max-height: 216px;
+            pointer-events: none;
+            transition: all $slider-transition-time ease-out;
+            object-fit: cover;
+            width: 100%;
+        }
+    }
+    .contenu{
+        background-color: rgba(0,0,0,0.45);
+        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 12px;
+        padding: 8px 16px;
+        height: 145px;
+        color: white;
+        overflow: hidden;
+        h3{
+            margin: 0;
+            font-size: clamp(14px, 20px, 26px);
+            text-shadow:
+                -1px -1px 0 #000,
+                1px -1px 0 #000,
+                -1px 1px 0 #000,
+                1px 1px 0 #000,
+                0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        p{
+            font-size: 18px;
+        }
+    }
+
+}
+
+@media screen and (max-width: 1280px)  {
+    .slider {
+        .perspective{
+            figure{
+                img {
+                    height: 150px;
+                }
+
+            }
+        }
+
+    }
+}
+@media screen and (max-width: 1050px) {
+    .slider{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+        place-items: center;
+
+        .perspective {
+            width: 100%;
+            .side0,
+            .side1,
+            .side2 {
+                position: relative;
+                transform: none;
+                animation: none;
+                figure{
+                    display: block;
+
+                    h2 {
+                        z-index: 10;
+                    }
+                    img {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 360px;
+                        border-radius: 12px;
+                    }
+                }
+                .contenu{
+                    display: none;
+                }
+
+            }
+
+            .side0 {
+                animation: animSlide 12s infinite both;
+                animation-delay: 0s;
+            }
+            .side1 {
+                animation: animSlide 12s infinite both;
+                animation-delay: 3s;
+            }
+            .side2 {
+                animation: animSlide 12s infinite both;
+                animation-delay: 6s;
+            }
+        }
+    }
+}
+/* Presentatiton client*/
+.description{
+    font-size: 19px;
+    line-height: 1.6;
+}
+/* Contact*/
+form {
+    display: grid;
+    place-items: center;
+    /*height: clamp(500px, 70vh, 700px);*/
+
+    [id*="form"] > div{
+        display: grid;
+        --size-width: 400px;
+        label{
+            font-weight: bold;
+            color: rgba(100, 100, 100, 0.85);
+            flex-basis: 200px;
+        }
+        input, textarea{
+           min-width: var(--size-width);
+        }
+        &:has(input[type="checkbox"]){
+            display: flex;
+            justify-content: space-between;
+        }
+        input[type="checkbox"]{
+            min-width: unset;
+            justify-self: start;
+        }
+        textarea{
+            min-height: 200px;
+        }
+        &:has(button){
+            justify-content: flex-end;
+            button{
+                min-width:var(--size-width);
+            }
+        }
+    }
+
+    [id*="form"] > div + div{
+        margin-block: 8px;
+    }
+
+
+}
+@keyframes leftTransition {
+    from {
+        transform: rotateY(20deg);
+    }
+    to {
+        transform-origin: calc(var(--img-width)/2) $header-size;
+        transform: rotateY(0) translateX(calc(50vw - var(--img-width)/2 - $margin-inline)) scale(var(--scale-x), var(--scale-y));
+    }
+}
+@keyframes middleTransition {
+    from {
+        transform: translateZ(-110px);
+    }
+    to {
+        transform-origin: calc(var(--img-width)/2) $header-size;
+        transform: scale(var(--scale-x), var(--scale-y));
+    }
+}
+@keyframes rightTransition {
+    from {
+        transform: rotateY(-20deg);
+    }
+    to {
+        transform-origin: calc(var(--img-width)/2) $header-size;
+        transform: rotateY(0) translateX(calc(-50vw + var(--img-width)/2 + $margin-inline)) scale(var(--scale-x), var(--scale-y));
+    }
+}
+
+@keyframes animSlide {
+    0%, 20% {
+        opacity: 1;
+        z-index: 3;
+    }
+    30%, 90% {
+        opacity: 0;
+        z-index: 1;
+    }
+    100% {
+        opacity: 1;
+        z-index: 3;
+    }
+}
+
+.article{
+    background-color: white;
+}
+
+.list-decalage > li{
+    margin-left:10px;
+}
+
+p{
+    margin-bottom:0px;
+}
+
+.survol{
+    position:relative;
+}
+
+.survol ul{
+    display:none;
+}
+
+.survol:hover{
+
+    ul{
+        display: block;
+        position:absolute;
+        width:200px;
+    }
+}
+
+header{
+    margin-bottom:100px;
+}

@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Actualites | Afaris Music Studio{% endblock %}
+
+{% block body %}
+    <section class="section-card p-4 p-lg-5">
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+            <div>
+                <h1 class="section-title mb-2">Toutes les actualites</h1>
+                <p class="text-muted mb-0">Liste paginee des actualites du studio, des ateliers et des evenements.</p>
+            </div>
+            <span class="badge text-bg-light border">Page {{ current_page }} / {{ total_pages }}</span>
+        </div>
+
+        <div class="row g-4">
+            {% for post in posts %}
+                <div class="col-md-6 col-xl-4">
+                    {% include 'partials/_post_card.html.twig' with { post: post } %}
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-muted mb-0">Aucune actualite disponible.</p>
+                </div>
+            {% endfor %}
+        </div>
+
+        {% if total_pages > 1 %}
+            <nav class="mt-4" aria-label="Pagination des actualites">
+                <ul class="pagination justify-content-center mb-0">
+                    <li class="page-item {{ current_page <= 1 ? 'disabled' }}">
+                        <a class="page-link" href="{{ path('app_postList', {page: current_page - 1}) }}">Precedent</a>
+                    </li>
+                    {% for page in 1..total_pages %}
+                        <li class="page-item {{ page == current_page ? 'active' }}">
+                            <a class="page-link" href="{{ path('app_postList', {page: page}) }}">{{ page }}</a>
+                        </li>
+                    {% endfor %}
+                    <li class="page-item {{ current_page >= total_pages ? 'disabled' }}">
+                        <a class="page-link" href="{{ path('app_postList', {page: current_page + 1}) }}">Suivant</a>
+                    </li>
+                </ul>
+            </nav>
+        {% endif %}
+    </section>
+{% endblock %}

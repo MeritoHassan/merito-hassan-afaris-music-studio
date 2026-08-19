@@ -1,0 +1,10 @@
+{{ form_start(form) }}
+    <div class="row g-3">
+        <div class="col-md-6">{{ form_row(form.username) }}</div>
+        <div class="col-md-6">{{ form_row(form.email) }}</div>
+        <div class="col-md-6">{{ form_row(form.plainPassword) }}</div>
+        <div class="col-md-6">{{ form_row(form.isVerified) }}</div>
+        <div class="col-12">{{ form_row(form.roles) }}</div>
+        <div class="col-12">{{ form_row(form.submit) }}</div>
+    </div>
+{{ form_end(form) }}

@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin utilisateurs{% endblock %}
+
+{% block body %}
+    <section class="admin-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h2 mb-1">Gestion des utilisateurs</h1>
+                <p class="text-muted mb-0">Creation, edition et controle des roles.</p>
+            </div>
+            <a class="btn btn-dark" href="{{ path('app_admin_user_new') }}">Nouvel utilisateur</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Utilisateur</th>
+                    <th>Email</th>
+                    <th>Roles</th>
+                    <th>Verifie</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in users %}
+                    <tr>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.username }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.roles|join(', ') }}</td>
+                        <td>{{ user.isVerified ? 'Oui' : 'Non' }}</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_admin_user_show', {id: user.id}) }}">Voir</a>
+                            <a class="btn btn-sm btn-outline-primary" href="{{ path('app_admin_user_edit', {id: user.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="6" class="text-center text-muted">Aucun utilisateur</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}

@@ -1,0 +1,18 @@
+{% set cover = post.images|first %}
+<article class="card h-100 border-0 shadow-sm">
+    <img
+        class="post-cover"
+        src="{{ cover ? asset(cover.chemin) : asset('images/placeholder.svg') }}"
+        alt="{{ post.titre }}"
+    >
+    <div class="card-body d-flex flex-column">
+        <div class="text-muted small mb-2">
+            {{ post.dateHeureCreation|date('d/m/Y H:i') }}
+            {% if post.auteur %}· {{ post.auteur.username }}{% endif %}
+        </div>
+        <h3 class="h5">{{ post.titre }}</h3>
+        {% set excerpt = post.contenu|striptags %}
+        <p class="text-muted flex-grow-1">{{ excerpt|length > 140 ? excerpt|slice(0, 140) ~ '...' : excerpt }}</p>
+        <a class="btn btn-outline-dark mt-auto" href="{{ path('app_postList_show', {id: post.id}) }}">Lire l'actualite</a>
+    </div>
+</article>

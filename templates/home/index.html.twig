@@ -1,0 +1,73 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil | Afaris Music Studio{% endblock %}
+
+{% block body %}
+    <section class="hero-card p-4 p-lg-5 mb-5">
+        <div class="row align-items-center g-4">
+            <div class="col-lg-5">
+                <span class="badge text-bg-warning mb-3">3 dernieres actualites</span>
+                <h1 class="section-title mb-3">Le studio qui relie creation sonore, ateliers et scene locale.</h1>
+                <p class="lead text-muted">
+                    Afaris Music Studio presente ses ateliers, ses sessions live et ses projets collectifs.
+                    La page d'accueil met en avant les trois dernieres actualites dans une vitrine visuelle construite avec Symfony.
+                </p>
+                <div class="d-flex gap-2 flex-wrap">
+                    <a class="btn btn-dark btn-lg" href="{{ path('app_postList') }}">Voir toutes les actualites</a>
+                    <a class="btn btn-outline-secondary btn-lg" href="{{ path('app_presentation_client') }}">Decouvrir le studio</a>
+                </div>
+            </div>
+            <div class="col-lg-7">
+                {% if posts is not empty %}
+                    <div class="background-image rounded-4 p-3">
+                        <div class="slider">
+                            {% for post in posts %}
+                                {% set cover = post.images|first %}
+                                <div class="perspective">
+                                    <div class="side{{ loop.index0 }}">
+                                        <a class="text-decoration-none text-white" href="{{ path('app_postList_show', {id: post.id}) }}">
+                                            <figure>
+                                                <h2>{{ post.titre }}</h2>
+                                                <img src="{{ cover ? asset(cover.chemin) : asset('images/placeholder.svg') }}" alt="{{ post.titre }}">
+                                            </figure>
+                                            <div class="contenu">
+                                                <h3>{{ post.auteur ? post.auteur.username : 'Equipe du studio' }}</h3>
+                                                {% set excerpt = post.contenu|striptags %}
+                                                <p>{{ excerpt|length > 110 ? excerpt|slice(0, 110) ~ '...' : excerpt }}</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="section-card p-4 text-center">
+                        <p class="mb-0 text-muted">Aucune actualite n'est encore publiee.</p>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <section class="section-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+            <div>
+                <h2 class="h3 mb-1">Dernieres publications</h2>
+                <p class="text-muted mb-0">Une vitrine dynamique pour les ateliers, rencontres et sessions du studio.</p>
+            </div>
+            <a class="btn btn-outline-dark" href="{{ path('app_postList') }}">Toutes les actualites</a>
+        </div>
+        <div class="row g-4">
+            {% for post in posts %}
+                <div class="col-md-6 col-xl-4">
+                    {% include 'partials/_post_card.html.twig' with { post: post } %}
+                </div>
+            {% else %}
+                <div class="col-12">
+                    <p class="text-muted mb-0">Aucun post a afficher.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+{% endblock %}

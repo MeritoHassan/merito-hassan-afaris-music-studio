@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Contact | Afaris Music Studio{% endblock %}
+
+{% block body %}
+    <section class="section-card p-4 p-lg-5">
+        <div class="row g-4">
+            <div class="col-lg-5">
+                <h1 class="section-title mb-3">Contacter le studio</h1>
+                <p class="text-muted">
+                    Utilisez ce formulaire pour une inscription a un atelier, une demande de session, un partenariat ou une question sur la programmation.
+                </p>
+            </div>
+            <div class="col-lg-7">
+                {{ form_start(form) }}
+                    <div class="row g-3">
+                        <div class="col-md-6">{{ form_row(form.nom) }}</div>
+                        <div class="col-md-6">{{ form_row(form.email) }}</div>
+                        <div class="col-12">{{ form_row(form.sujet) }}</div>
+                        <div class="col-12">{{ form_row(form.message) }}</div>
+                        <div class="col-12">{{ form_row(form.submit) }}</div>
+                    </div>
+                {{ form_end(form) }}
+            </div>
+        </div>
+    </section>
+{% endblock %}

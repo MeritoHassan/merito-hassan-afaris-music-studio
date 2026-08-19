@@ -1,0 +1,44 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Le studio | Afaris Music Studio{% endblock %}
+
+{% block body %}
+    <section class="section-card p-4 p-lg-5">
+        <div class="row g-4 align-items-center">
+            <div class="col-lg-4 text-center">
+                <img src="{{ asset('images/studio-badge.svg') }}" alt="Afaris Music Studio" class="img-fluid rounded-4 shadow-sm" style="max-width: 260px;">
+            </div>
+            <div class="col-lg-8">
+                <span class="badge text-bg-warning mb-3">Presentation du client</span>
+                <h1 class="section-title mb-3">Afaris Music Studio, espace de creation et d'apprentissage</h1>
+                <p class="lead text-muted">
+                    Le studio accompagne les apprenants et artistes dans la production, la pratique collective et la diffusion de projets musicaux.
+                </p>
+                <div class="row g-3 mt-3">
+                    <div class="col-md-4">
+                        <div class="admin-card p-3 h-100">
+                            <div class="text-muted small">Structure</div>
+                            <strong>{{ studio.name }}</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-card p-3 h-100">
+                            <div class="text-muted small">Experience</div>
+                            <strong>{{ studio.age }} ans</strong>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="admin-card p-3 h-100">
+                            <div class="text-muted small">Programmes</div>
+                            <strong>{{ studio.totalPrograms }} axes</strong>
+                        </div>
+                    </div>
+                </div>
+                <p class="mt-4 mb-0">
+                    Le site permet de publier les actualites du studio, d'annoncer les ateliers, d'ouvrir les commentaires
+                    aux membres et de gerer simplement les contenus depuis un backoffice Symfony.
+                </p>
+            </div>
+        </div>
+    </section>
+{% endblock %}

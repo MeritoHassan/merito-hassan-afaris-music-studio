@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ post.titre }} | Afaris Music Studio{% endblock %}
+
+{% block body %}
+    {% set cover = post.images|first %}
+    <article class="section-card p-4 p-lg-5 mb-4">
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <a class="text-decoration-none small text-muted" href="{{ path('app_postList') }}">← Retour aux actualites</a>
+                <h1 class="section-title mt-2 mb-3">{{ post.titre }}</h1>
+                <div class="text-muted mb-4">
+                    Publie le {{ post.dateHeureCreation|date('d/m/Y H:i') }}
+                    {% if post.auteur %}· par {{ post.auteur.username }}{% endif %}
+                </div>
+                <div class="fs-5 lh-lg">{{ post.contenu|nl2br }}</div>
+            </div>
+            <div class="col-lg-5">
+                <img
+                    class="post-cover-lg"
+                    src="{{ cover ? asset(cover.chemin) : asset('images/placeholder.svg') }}"
+                    alt="{{ post.titre }}"
+                >
+            </div>
+        </div>
+    </article>
+
+    <section class="row g-4">
+        <div class="col-lg-7">
+            <div class="section-card p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h2 class="h3 mb-0">Commentaires</h2>
+                    <span class="badge text-bg-light border">{{ commentaires|length }}</span>
+                </div>
+
+                {% for commentaire in commentaires %}
+                    <article class="comment-card {{ commentaire.signale ? 'is-reported' : '' }} rounded-4 p-3 mb-3">
+                        <div class="d-flex justify-content-between align-items-start gap-3 mb-2">
+                            <div>
+                                <strong>{{ commentaire.auteur ? commentaire.auteur.username : 'Utilisateur' }}</strong>
+                                <div class="text-muted small">{{ commentaire.dateHeureCreation|date('d/m/Y H:i') }}</div>
+                            </div>
+                            <div class="d-flex flex-column align-items-end gap-2">
+                                {% if commentaire.signale %}
+                                    <span class="badge text-bg-danger">Signale</span>
+                                {% endif %}
+                                <form method="post" action="{{ path('app_comment_report', {id: commentaire.id}) }}">
+                                    <input type="hidden" name="_token" value="{{ csrf_token('report' ~ commentaire.id) }}">
+                                    <button class="btn btn-sm btn-outline-danger" type="submit">Signaler</button>
+                                </form>
+                            </div>
+                        </div>
+                        <p class="mb-0">{{ commentaire.contenu|nl2br }}</p>
+                    </article>
+                {% else %}
+                    <p class="text-muted mb-0">Aucun commentaire pour le moment.</p>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="col-lg-5">
+            <div class="section-card p-4">
+                <h2 class="h3 mb-3">Laisser un commentaire</h2>
+                {% if app.user %}
+                    {{ form_start(commentaire_form) }}
+                        {{ form_row(commentaire_form.contenu) }}
+                        {{ form_row(commentaire_form.submit) }}
+                    {{ form_end(commentaire_form) }}
+                {% else %}
+                    <p class="text-muted">Connectez-vous pour reagir a cette actualite du studio.</p>
+                    <a class="btn btn-dark" href="{{ path('app_login') }}">Se connecter</a>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+{% endblock %}

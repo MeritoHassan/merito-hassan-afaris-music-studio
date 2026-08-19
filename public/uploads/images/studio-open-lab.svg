@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#0b1220"/>
+  <rect x="100" y="120" width="1000" height="560" rx="34" fill="#172033"/>
+  <rect x="170" y="210" width="320" height="250" rx="24" fill="#1f2937"/>
+  <rect x="550" y="180" width="190" height="330" rx="24" fill="#334155"/>
+  <rect x="800" y="220" width="240" height="210" rx="24" fill="#1f2937"/>
+  <path d="M220 520h760" stroke="#475569" stroke-width="24" stroke-linecap="round"/>
+  <circle cx="240" cy="250" r="46" fill="#f59e0b"/>
+  <circle cx="310" cy="250" r="46" fill="#10b981"/>
+  <circle cx="380" cy="250" r="46" fill="#06b6d4"/>
+  <text x="120" y="100" fill="#f8fafc" font-size="52" font-family="Arial, Helvetica, sans-serif" font-weight="700">Open lab sonore</text>
+  <text x="120" y="156" fill="#cbd5e1" font-size="28" font-family="Arial, Helvetica, sans-serif">Accueil des nouveaux membres et prise en main du materiel</text>
+</svg>

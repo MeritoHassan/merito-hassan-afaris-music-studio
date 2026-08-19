@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Admin images{% endblock %}
+
+{% block body %}
+    <section class="admin-card p-4">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <h1 class="h2 mb-1">Gestion des images</h1>
+                <p class="text-muted mb-0">Images liees aux posts du blog.</p>
+            </div>
+            <a class="btn btn-dark" href="{{ path('app_admin_image_new') }}">Nouvelle image</a>
+        </div>
+
+        <div class="table-responsive">
+            <table class="table align-middle">
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Apercu</th>
+                    <th>Nom</th>
+                    <th>Post</th>
+                    <th class="text-end">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for image in images %}
+                    <tr>
+                        <td>{{ image.id }}</td>
+                        <td><img src="{{ asset(image.chemin) }}" alt="{{ image.nomImage }}" style="width: 90px; height: 60px; object-fit: cover;" class="rounded"></td>
+                        <td>{{ image.nomImage }}</td>
+                        <td>{{ image.post ? image.post.titre : '—' }}</td>
+                        <td class="text-end">
+                            <a class="btn btn-sm btn-outline-secondary" href="{{ path('app_admin_image_show', {id: image.id}) }}">Voir</a>
+                            <a class="btn btn-sm btn-outline-primary" href="{{ path('app_admin_image_edit', {id: image.id}) }}">Modifier</a>
+                        </td>
+                    </tr>
+                {% else %}
+                    <tr><td colspan="5" class="text-center text-muted">Aucune image</td></tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+{% endblock %}

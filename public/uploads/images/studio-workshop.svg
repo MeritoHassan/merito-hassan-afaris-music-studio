@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800">
+  <rect width="1200" height="800" fill="#111827"/>
+  <rect x="0" y="560" width="1200" height="240" fill="#0b1220"/>
+  <circle cx="215" cy="180" r="84" fill="#f59e0b"/>
+  <rect x="120" y="300" width="300" height="190" rx="20" fill="#1f2937" stroke="#f59e0b" stroke-width="8"/>
+  <rect x="470" y="240" width="230" height="320" rx="28" fill="#374151"/>
+  <rect x="760" y="200" width="300" height="280" rx="24" fill="#1f2937"/>
+  <rect x="800" y="240" width="220" height="22" rx="11" fill="#10b981"/>
+  <rect x="800" y="292" width="160" height="18" rx="9" fill="#9ca3af"/>
+  <rect x="800" y="334" width="200" height="18" rx="9" fill="#9ca3af"/>
+  <text x="120" y="130" fill="#f9fafb" font-size="56" font-family="Arial, Helvetica, sans-serif" font-weight="700">Atelier MAO</text>
+  <text x="120" y="190" fill="#d1d5db" font-size="28" font-family="Arial, Helvetica, sans-serif">Initiation a la production et au mixage en groupe</text>
+</svg>
