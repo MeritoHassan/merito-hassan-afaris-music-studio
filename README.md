@@ -5,6 +5,7 @@ Projet Symfony realise sans CMS pour presenter un studio creatif, ses actualites
 ## Application en ligne
 
 - https://studio.afaris.be
+- https://github.com/MeritoHassan/merito-hassan-afaris-music-studio
 
 ## Fonctionnalites
 
@@ -20,3 +21,8 @@ Projet Symfony realise sans CMS pour presenter un studio creatif, ses actualites
 
 - identifiant : `AfarisAdmin`
 
+## Documentation du rendu
+
+- specifications fonctionnelles : `docs/specifications-fonctionnelles.md`
+- diagramme de classe : `docs/diagramme-classe.md`
+- etat final pret pour le rendu : `docs/etat-final-rendu.md`

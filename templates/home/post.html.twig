@@ -4,6 +4,7 @@
 
 {% block body %}
     {% set cover = post.images|first %}
+    {% set coverPath = cover and cover.chemin ? cover.chemin|replace({'/uploads/images/': 'images/', 'uploads/images/': 'images/'}) : 'images/placeholder.svg' %}
     <article class="section-card p-4 p-lg-5 mb-4">
         <div class="row g-4">
             <div class="col-lg-7">
@@ -18,7 +19,7 @@
             <div class="col-lg-5">
                 <img
                     class="post-cover-lg"
-                    src="{{ cover ? asset(cover.chemin) : asset('images/placeholder.svg') }}"
+                    src="{{ asset(coverPath) }}"
                     alt="{{ post.titre }}"
                 >
             </div>

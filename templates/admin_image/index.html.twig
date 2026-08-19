@@ -27,7 +27,7 @@
                 {% for image in images %}
                     <tr>
                         <td>{{ image.id }}</td>
-                        <td><img src="{{ asset(image.chemin) }}" alt="{{ image.nomImage }}" style="width: 90px; height: 60px; object-fit: cover;" class="rounded"></td>
+                        <td><img src="{{ asset(image.chemin|replace({'/uploads/images/': 'images/', 'uploads/images/': 'images/'})) }}" alt="{{ image.nomImage }}" style="width: 90px; height: 60px; object-fit: cover;" class="rounded"></td>
                         <td>{{ image.nomImage }}</td>
                         <td>{{ image.post ? image.post.titre : '—' }}</td>
                         <td class="text-end">

@@ -1,8 +1,9 @@
 {% set cover = post.images|first %}
-<article class="card h-100 border-0 shadow-sm">
+{% set coverPath = cover and cover.chemin ? cover.chemin|replace({'/uploads/images/': 'images/', 'uploads/images/': 'images/'}) : 'images/placeholder.svg' %}
+<article class="card post-card h-100 border-0 shadow-sm">
     <img
         class="post-cover"
-        src="{{ cover ? asset(cover.chemin) : asset('images/placeholder.svg') }}"
+        src="{{ asset(coverPath) }}"
         alt="{{ post.titre }}"
     >
     <div class="card-body d-flex flex-column">

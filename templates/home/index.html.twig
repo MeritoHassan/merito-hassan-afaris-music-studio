@@ -3,44 +3,78 @@
 {% block title %}Accueil | Afaris Music Studio{% endblock %}
 
 {% block body %}
-    <section class="hero-card p-4 p-lg-5 mb-5">
+    {% set featured = posts|first %}
+    {% set secondaryPosts = posts|slice(1, 2) %}
+
+    <section class="hero-card afaris-hero p-4 p-lg-5 mb-5">
         <div class="row align-items-center g-4">
-            <div class="col-lg-5">
-                <span class="badge text-bg-warning mb-3">3 dernieres actualites</span>
+            <div class="col-lg-6">
+                <span class="hero-kicker">Afaris Music Studio</span>
                 <h1 class="section-title mb-3">Le studio qui relie creation sonore, ateliers et scene locale.</h1>
                 <p class="lead text-muted">
                     Afaris Music Studio presente ses ateliers, ses sessions live et ses projets collectifs.
-                    La page d'accueil met en avant les trois dernieres actualites dans une vitrine visuelle construite avec Symfony.
+                    Cette vitrine met en avant les actualites, les rencontres et les temps forts du studio dans une interface plus claire et plus credible.
                 </p>
                 <div class="d-flex gap-2 flex-wrap">
                     <a class="btn btn-dark btn-lg" href="{{ path('app_postList') }}">Voir toutes les actualites</a>
                     <a class="btn btn-outline-secondary btn-lg" href="{{ path('app_presentation_client') }}">Decouvrir le studio</a>
                 </div>
-            </div>
-            <div class="col-lg-7">
-                {% if posts is not empty %}
-                    <div class="background-image rounded-4 p-3">
-                        <div class="slider">
-                            {% for post in posts %}
-                                {% set cover = post.images|first %}
-                                <div class="perspective">
-                                    <div class="side{{ loop.index0 }}">
-                                        <a class="text-decoration-none text-white" href="{{ path('app_postList_show', {id: post.id}) }}">
-                                            <figure>
-                                                <h2>{{ post.titre }}</h2>
-                                                <img src="{{ cover ? asset(cover.chemin) : asset('images/placeholder.svg') }}" alt="{{ post.titre }}">
-                                            </figure>
-                                            <div class="contenu">
-                                                <h3>{{ post.auteur ? post.auteur.username : 'Equipe du studio' }}</h3>
-                                                {% set excerpt = post.contenu|striptags %}
-                                                <p>{{ excerpt|length > 110 ? excerpt|slice(0, 110) ~ '...' : excerpt }}</p>
-                                            </div>
-                                        </a>
-                                    </div>
-                                </div>
-                            {% endfor %}
+                <div class="row g-3 mt-2">
+                    <div class="col-sm-4">
+                        <div class="hero-stat">
+                            <strong>3</strong>
+                            <span>actualites recentes mises en avant</span>
                         </div>
                     </div>
+                    <div class="col-sm-4">
+                        <div class="hero-stat">
+                            <strong>1</strong>
+                            <span>site Symfony sans CMS</span>
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="hero-stat">
+                            <strong>100%</strong>
+                            <span>contenu administrable depuis le backoffice</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                {% if featured %}
+                    {% set cover = featured.images|first %}
+                    {% set coverPath = cover and cover.chemin ? cover.chemin|replace({'/uploads/images/': 'images/', 'uploads/images/': 'images/'}) : 'images/placeholder.svg' %}
+                    <article class="featured-story-card">
+                        <a class="text-decoration-none text-dark" href="{{ path('app_postList_show', {id: featured.id}) }}">
+                            <img
+                                class="featured-story-cover"
+                                src="{{ asset(coverPath) }}"
+                                alt="{{ featured.titre }}"
+                            >
+                            <div class="p-4">
+                                <div class="text-muted small mb-2">
+                                    {{ featured.dateHeureCreation|date('d/m/Y H:i') }}
+                                    {% if featured.auteur %}· {{ featured.auteur.username }}{% endif %}
+                                </div>
+                                <h2 class="h3 mb-3">{{ featured.titre }}</h2>
+                                {% set excerpt = featured.contenu|striptags %}
+                                <p class="text-muted mb-0">
+                                    {{ excerpt|length > 190 ? excerpt|slice(0, 190) ~ '...' : excerpt }}
+                                </p>
+                            </div>
+                        </a>
+                    </article>
+
+                    {% if secondaryPosts is not empty %}
+                        <div class="mini-story-list mt-3">
+                            {% for post in secondaryPosts %}
+                                <a class="mini-story-link" href="{{ path('app_postList_show', {id: post.id}) }}">
+                                    <span class="mini-story-date">{{ post.dateHeureCreation|date('d/m/Y') }}</span>
+                                    <strong>{{ post.titre }}</strong>
+                                </a>
+                            {% endfor %}
+                        </div>
+                    {% endif %}
                 {% else %}
                     <div class="section-card p-4 text-center">
                         <p class="mb-0 text-muted">Aucune actualite n'est encore publiee.</p>
@@ -50,7 +84,30 @@
         </div>
     </section>
 
-    <section class="section-card p-4">
+    <section class="section-card p-4 p-lg-5 mb-4">
+        <div class="row g-3">
+            <div class="col-md-4">
+                <div class="info-tile h-100">
+                    <h2 class="h5 mb-2">Ateliers</h2>
+                    <p class="text-muted mb-0">Des initiations, rencontres et sessions pratiques autour de la production sonore.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-tile h-100">
+                    <h2 class="h5 mb-2">Scene locale</h2>
+                    <p class="text-muted mb-0">Le studio valorise les artistes invites et les projets collectifs portes par la communaute.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="info-tile h-100">
+                    <h2 class="h5 mb-2">Backoffice</h2>
+                    <p class="text-muted mb-0">Actualites, commentaires, utilisateurs et medias peuvent etre geres depuis l'administration.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-card p-4 p-lg-5">
         <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
             <div>
                 <h2 class="h3 mb-1">Dernieres publications</h2>
